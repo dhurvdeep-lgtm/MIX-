@@ -46,4 +46,14 @@ class CommandBot(Client):
             return
 
         # Default auto-reply
-        self.send(Message(text=f"🤖 Auto
+        self.send(Message(text=f"🤖 Auto-reply: {message_object.text}"),
+                  thread_id=thread_id, thread_type=thread_type)
+
+    # Detect title change
+    def onTitleChange(self, author_id, thread_id, new_title, **kwargs):
+        if name_lock.get(thread_id, False):
+            old_title = name_lock[thread_id]
+            if new_title != old_title:
+                self.changeThreadTitle(old_title, thread_id)
+                self.send(Message(text=f"⚠ Group name is locked! Resetting: {old_title}"),
+                          thread_id=thread_id, thread_type=ThreadType.GROUP)
