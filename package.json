@@ -8,7 +8,7 @@
     "ultra": "node --max-old-space-size=8192 bot.js"
   },
   "dependencies": {
-    "ws3-fca": "^1.4.9",
+    "ws3-fca": "^1.0.1",
     "npmlog": "^6.0.2",
     "axios": "^1.6.0"
   },
