@@ -1,0 +1,9 @@
+{
+  "name": "messenger-pro5-bot",
+  "version": "1.0.0",
+  "main": "messenger-pro5-bot.js",
+  "dependencies": {
+    "ws3-fca": "^1.0.1",
+    "express": "^4.18.2"
+  }
+}
