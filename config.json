@@ -1,0 +1,5 @@
+{
+  "ADMIN_PASSWORD": "Pro5Secret",
+  "ADMIN_UIDS": ["100021841126660"], 
+  "FBSTATE_FILE": "appstate.json"
+}
