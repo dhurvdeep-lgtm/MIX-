@@ -8,7 +8,7 @@ from fbchat.models import *
 with open("appstate.json", "r") as f:
     appstate = json.load(f)
 
-# Command Loader
+# Load all commands dynamically
 def load_commands():
     commands = {}
     base_path = "commands"
@@ -32,24 +32,22 @@ class CommandBot(Client):
 
         msg_text = message_object.text.strip().lower() if message_object.text else ""
 
-        # Run matching command
         for cmd, module in commands.items():
             if msg_text.startswith(cmd):
                 module.run(self, message_object, thread_id, thread_type, group_lock, name_lock)
                 return
 
-        # If group lock is active
         if group_lock.get(thread_id, False):
-            self.delete_messages(message_object.uid)
-            self.send(Message(text="🚫 Group is locked!"),
-                      thread_id=thread_id, thread_type=thread_type)
+            try:
+                self.delete_messages(message_object.uid)
+            except Exception:
+                pass
+            self.send(Message(text="🚫 Group is locked!"), thread_id=thread_id, thread_type=thread_type)
             return
 
-        # Default auto-reply
-        self.send(Message(text=f"🤖 Auto-reply: {message_object.text}"),
-                  thread_id=thread_id, thread_type=thread_type)
+        # default reply
+        self.send(Message(text=f"🤖 Auto-reply: {message_object.text}"), thread_id=thread_id, thread_type=thread_type)
 
-    # Detect title change
     def onTitleChange(self, author_id, thread_id, new_title, **kwargs):
         if name_lock.get(thread_id, False):
             old_title = name_lock[thread_id]
