@@ -1,6 +1,10 @@
 import time
 import traceback
+import warnings
 from bot import CommandBot, appstate
+
+# 🚫 SyntaxWarning suppress
+warnings.filterwarnings("ignore", category=SyntaxWarning)
 
 def start_bot():
     print("✅ Bot starting...")
