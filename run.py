@@ -3,7 +3,7 @@ import traceback
 import warnings
 from bot import CommandBot, appstate
 
-# 🚫 SyntaxWarning suppress
+# Suppress warnings (like invalid escape sequence \w)
 warnings.filterwarnings("ignore", category=SyntaxWarning)
 
 def start_bot():
